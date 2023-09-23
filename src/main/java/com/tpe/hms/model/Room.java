@@ -18,8 +18,6 @@ public class Room {
     private int capacity;
 
     //getter and setter
-
-
     public Long getId() {
         return id;
     }
