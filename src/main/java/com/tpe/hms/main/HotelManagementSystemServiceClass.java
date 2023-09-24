@@ -88,16 +88,20 @@ public class HotelManagementSystemServiceClass {
                     hotelService.saveHotel();
                     break;
                 case 2:
-
+                    //step 14 e : findHotelByID
                     System.out.println(" Find  hotel by id  ");
+                    Long hotelId=  scanner.nextLong();
+                    hotelService.findHotelById(hotelId);
                     break;
                 case 3:
-
-                    System.out.println("3. Delete   Hotel  By id ");
+                    System.out.println("Enter the hotel Id to Delete  ");
+                    Long id=  scanner.nextLong();
+                    hotelService.DeleteHotelById(id);
                     break;
                 case 4:
 
-                    System.out.println("4. Find  All  Hotels  ");
+                    System.out.println("-----  Find  All  Hotels ----  ");
+                    hotelService.findAllHotels();
                     break;
                 case 5:
 
