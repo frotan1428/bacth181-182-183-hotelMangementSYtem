@@ -22,5 +22,8 @@ public interface HotelRepository {
     //step 16a display All hotels
     List<Hotel>   findAllHotels();
 
+    //step 17a update hotel
+
+    void updateHotel(Hotel existHotel);
 
 }

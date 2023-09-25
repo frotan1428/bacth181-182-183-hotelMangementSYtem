@@ -1,10 +1,9 @@
 package com.tpe.hms.model;
 
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 //step 9a : Entity hotel and room
 @Entity
@@ -23,6 +22,16 @@ public class Hotel {//hotel
 
     //Constructors-getter and setter
 
+    @OneToMany(mappedBy = "hotel",fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    private List<Room> rooms = new ArrayList<>();
+
+    public List<Room> getRooms() {
+        return rooms;
+    }
+
+    public void setRooms(List<Room> rooms) {
+        this.rooms = rooms;
+    }
 
     public Hotel() {
     }
@@ -65,6 +74,7 @@ public class Hotel {//hotel
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", location='" + location + '\'' +
+                ", rooms=" + rooms +
                 '}';
     }
 }

@@ -1,6 +1,7 @@
 package com.tpe.hms.config;
 
 import com.tpe.hms.model.Hotel;
+import com.tpe.hms.model.Room;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -16,12 +17,14 @@ public class HibernateUtils {
        try {
            Configuration configuration= new Configuration()
                    .configure("hibernate.cfg.xml")
-                   .addAnnotatedClass(Hotel.class);
+                   .addAnnotatedClass(Hotel.class)
+                   .addAnnotatedClass(Room.class);
+
            sessionFactory =configuration.buildSessionFactory();
        }catch (Throwable ex){
 
-           /// System.err.println("Initial SessionFactory creation is failed "+ ex);
-           throw new ExceptionInInitializerError("Initial SessionFactory creation is failed " +ex);
+           System.err.println("Initial SessionFactory creation failed: " + ex);
+           throw new ExceptionInInitializerError(ex);
        }
     }
 

@@ -1,10 +1,13 @@
 package com.tpe.hms.model;
 
 
-import javax.persistence.Column;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 //step 9b : room entity
+
+@Entity
+@Table(name = "tbl_room")
+
 public class Room {
     //step 13 : add some filed about Room
 
@@ -16,6 +19,18 @@ public class Room {
 
     @Column(nullable = false)
     private int capacity;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "hotel_id" ,nullable = false)
+    private Hotel hotel;
+
+    public Hotel getHotel() {
+        return hotel;
+    }
+
+    public void setHotel(Hotel hotel) {
+        this.hotel = hotel;
+    }
 
     //getter and setter
     public Long getId() {
@@ -63,6 +78,10 @@ public class Room {
                 "id=" + id +
                 ", number='" + number + '\'' +
                 ", capacity=" + capacity +
+//                ", hotel=" + hotel +
                 '}';
     }
+
 }
+
+

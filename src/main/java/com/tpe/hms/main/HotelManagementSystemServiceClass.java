@@ -1,9 +1,15 @@
 package com.tpe.hms.main;
 
+import com.tpe.hms.exception.HotelNotFoundException;
+import com.tpe.hms.model.Hotel;
 import com.tpe.hms.repository.HotelRepository;
 import com.tpe.hms.repository.HotelRepositoryImpl;
+import com.tpe.hms.repository.RoomRepository;
+import com.tpe.hms.repository.RoomRepositoryImpl;
 import com.tpe.hms.service.HotelService;
 import com.tpe.hms.service.HotelServiceImpl;
+import com.tpe.hms.service.RoomService;
+import com.tpe.hms.service.RoomServiceImpl;
 
 import javax.sound.midi.Soundbank;
 import java.util.Scanner;
@@ -20,6 +26,11 @@ public class HotelManagementSystemServiceClass {
         //create an instance pf hotel repository and hotel service ;
         HotelRepository hotelRepository= new HotelRepositoryImpl();
         HotelService hotelService= new HotelServiceImpl(hotelRepository);
+
+        //create an instance pf Room repository and Room service ;
+        RoomRepository roomRepository= new RoomRepositoryImpl();
+        RoomService roomService = new RoomServiceImpl(roomRepository,hotelRepository);
+
 
       scanner = new Scanner(System.in);
 
@@ -44,7 +55,7 @@ public class HotelManagementSystemServiceClass {
                     displayHotelOperationMenu(hotelService);
                      break;
                  case 2:
-                     System.out.println("2. Room Operations");
+                    displayRoomOperationMenu(roomService);
                      break;
                  case 3:
                      System.out.println("3. Guest Operations");
@@ -104,8 +115,29 @@ public class HotelManagementSystemServiceClass {
                     hotelService.findAllHotels();
                     break;
                 case 5:
+                    System.out.println("======= Update   Hotel  by Id  ======");
+                    System.out.println("Enter The Hotel Id To Update : ");
+                   Long existId = scanner.nextLong();
+                    scanner.nextLine(); //consume new line
+                    try {
 
-                    System.out.println("5. Update   Hotel  by Id ");
+                      Hotel existHotel =  hotelService.findHotelById(existId);
+                        System.out.println("Enter  the Update  hotel Name : ");
+                        String name  =scanner.nextLine();
+                        System.out.println("Enter the Update Hotel Location : ");
+                        String location = scanner.nextLine();
+
+                        //create a new object that we want to update
+
+                        Hotel updateHotel = new Hotel();
+                        updateHotel.setId(existId);
+                        updateHotel.setName(name);
+                        updateHotel.setLocation(location);
+                        hotelService.updateHotelById(existId,updateHotel);
+                    }catch (HotelNotFoundException e){
+                        System.out.println(e.getMessage());
+                    }
+
                     break;
                 case 6:
                    exit=true;
@@ -120,4 +152,52 @@ public class HotelManagementSystemServiceClass {
         }
 
     }
+
+    //step 18[a-b-c-d-e] : ROOM CRUD OPERATIONS
+    private static void displayRoomOperationMenu(RoomService roomService){
+        scanner = new Scanner(System.in);
+
+        boolean exit = false;
+        while (!exit){
+            System.out.println("======Room Operations ======");
+            System.out.println("1. Add new Room  ");
+            System.out.println("2. Find  Room by id  ");
+            System.out.println("3. Delete   Room  By id ");
+            System.out.println("4. Find  All  Rooms  ");
+            System.out.println("5. Return to  Main Menu  ");
+            System.out.print("Enter your Choice :");
+
+            int choice = scanner.nextInt();
+            scanner.nextLine();
+            switch (choice){
+                case 1:
+                    //step 18 e: saveHotel
+                    System.out.println("---- Add a new Room ----");
+                    roomService.saveRoom();
+                    break;
+                case 2:
+
+                    System.out.println(" Find  Room by id  ");
+                    break;
+                case 3:
+                    System.out.println("Enter the Room Id to Delete  ");
+
+                    break;
+                case 4:
+
+                    System.out.println("-----  Find  All  Rooms ----  ");
+                    break;
+                case 5:
+                    exit=true;
+                    break;
+                default:
+                    System.out.println("Invalid choice . please try Again");
+                    break;
+            }
+
+
+        }
+
+    }
+
 }
