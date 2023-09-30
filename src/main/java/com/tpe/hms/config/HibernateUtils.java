@@ -16,9 +16,9 @@ public class HibernateUtils {
     static {
        try {
            Configuration configuration= new Configuration()
-                   .configure("hibernate.cfg.xml")
-                   .addAnnotatedClass(Hotel.class)
-                   .addAnnotatedClass(Room.class);
+                   .configure("hibernate.cfg.xml");
+//                   .addAnnotatedClass(Hotel.class)
+//                   .addAnnotatedClass(Room.class);
 
            sessionFactory =configuration.buildSessionFactory();
        }catch (Throwable ex){

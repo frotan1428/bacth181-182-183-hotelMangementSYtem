@@ -33,8 +33,11 @@
         <property name="format_sql">true</property>
 
 <!--&lt;!&ndash;        mapping entity &ndash;&gt;-->
-<!--        <mapping class="com.tpe.hms.model.Hotel"/>-->
-<!--        <mapping class="com.tpe.hms.model.Room"/>-->
+        <mapping class="com.tpe.hms.model.Hotel"/>
+        <mapping class="com.tpe.hms.model.Room"/>
+        <mapping class="com.tpe.hms.model.Address"/>
+        <mapping class="com.tpe.hms.model.Reservation"/>
+        <mapping class="com.tpe.hms.model.Guest"/>
 
 
     </session-factory>

@@ -2,14 +2,8 @@ package com.tpe.hms.main;
 
 import com.tpe.hms.exception.HotelNotFoundException;
 import com.tpe.hms.model.Hotel;
-import com.tpe.hms.repository.HotelRepository;
-import com.tpe.hms.repository.HotelRepositoryImpl;
-import com.tpe.hms.repository.RoomRepository;
-import com.tpe.hms.repository.RoomRepositoryImpl;
-import com.tpe.hms.service.HotelService;
-import com.tpe.hms.service.HotelServiceImpl;
-import com.tpe.hms.service.RoomService;
-import com.tpe.hms.service.RoomServiceImpl;
+import com.tpe.hms.repository.*;
+import com.tpe.hms.service.*;
 
 import javax.sound.midi.Soundbank;
 import java.util.Scanner;
@@ -31,6 +25,11 @@ public class HotelManagementSystemServiceClass {
         RoomRepository roomRepository= new RoomRepositoryImpl();
         RoomService roomService = new RoomServiceImpl(roomRepository,hotelRepository);
 
+
+        //create instance of Guest Repository
+
+        GuestRepository guestRepository = new GuestRepositoryImpl();
+        GuestService guestService = new GuestServiceImpl(guestRepository);
 
       scanner = new Scanner(System.in);
 
@@ -58,7 +57,7 @@ public class HotelManagementSystemServiceClass {
                     displayRoomOperationMenu(roomService);
                      break;
                  case 3:
-                     System.out.println("3. Guest Operations");
+                    displayGuestOperationMenu(guestService);
                      break;
                  case 4:
                      System.out.println("4. Reservation Operations");
@@ -186,6 +185,54 @@ public class HotelManagementSystemServiceClass {
                 case 4:
 
                     System.out.println("-----  Find  All  Rooms ----  ");
+                    break;
+                case 5:
+                    exit=true;
+                    break;
+                default:
+                    System.out.println("Invalid choice . please try Again");
+                    break;
+            }
+
+
+        }
+
+    }
+
+
+    //step 22{a-b-c-d-e} Guest Operation
+    private static void displayGuestOperationMenu(GuestService guestService){
+        scanner = new Scanner(System.in);
+
+        boolean exit = false;
+        while (!exit){
+            System.out.println("======Guest Operations ======");
+            System.out.println("1. Add new Guest  ");
+            System.out.println("2. Find  Guest by id  ");
+            System.out.println("3. Delete   Guest  By id ");
+            System.out.println("4. Find  All  Guest  ");
+            System.out.println("5. Return to  Main Menu   ");
+            System.out.print("Enter your Choice  :");
+
+            int choice = scanner.nextInt();
+            scanner.nextLine();
+            switch (choice){
+                case 1:
+                    //step 18 e: saveHotel
+                    System.out.println("---- Add a new Guest ----");
+                    guestService.saveGuest();
+                    break;
+                case 2:
+
+                    System.out.println(" Find  Guest by id  ");
+                    break;
+                case 3:
+                    System.out.println("Enter the Guest Id to Delete  ");
+
+                    break;
+                case 4:
+
+                    System.out.println("-----  Find  All  Guest ----  ");
                     break;
                 case 5:
                     exit=true;
