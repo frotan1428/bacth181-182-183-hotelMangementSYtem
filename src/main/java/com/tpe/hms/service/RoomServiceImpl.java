@@ -1,6 +1,7 @@
 package com.tpe.hms.service;
 
 import com.tpe.hms.exception.HotelNotFoundException;
+import com.tpe.hms.exception.RoomNotFoundException;
 import com.tpe.hms.model.Hotel;
 import com.tpe.hms.model.Room;
 import com.tpe.hms.repository.HotelRepository;
@@ -68,4 +69,27 @@ public class RoomServiceImpl  implements RoomService{
 
         return room;
     }
+
+
+    //step 19 d: find Room By Id;
+    @Override
+    public Room findRoomById(Long id) {
+
+      try {
+          Room foundRoom=  roomRepository.findRoomById(id);
+          if (foundRoom!=null){
+              System.out.println("===========================");
+               System.out.println(foundRoom);
+              return  foundRoom;
+
+          }else {
+              throw  new RoomNotFoundException("Room Not Found WIth Id : "+id);
+          }
+      }catch (RoomNotFoundException e){
+          System.out.println(e.getMessage());
+
+      }
+        return  null;
+    }
 }
+

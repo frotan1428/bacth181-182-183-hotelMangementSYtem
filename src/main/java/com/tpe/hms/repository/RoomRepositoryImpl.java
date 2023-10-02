@@ -19,4 +19,12 @@ public class RoomRepositoryImpl implements RoomRepository {
         }
 
     }
+
+
+    //step 19 b : findRoomById
+    @Override
+    public Room findRoomById(Long roomId) {
+       Session session = HibernateUtils.getSessionFactory().openSession();
+        return session.get(Room.class,roomId);
+    }
 }

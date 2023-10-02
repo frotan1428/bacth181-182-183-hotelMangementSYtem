@@ -31,6 +31,11 @@ public class HotelManagementSystemServiceClass {
         GuestRepository guestRepository = new GuestRepositoryImpl();
         GuestService guestService = new GuestServiceImpl(guestRepository);
 
+        //create instance of Reservation  Repository and ReservationService
+
+        ReservationRepository reservationRepository= new ReservationRepositoryImpl();
+        ReservationService reservationService= new ReservationServiceImpl(reservationRepository,guestRepository,roomRepository);
+
       scanner = new Scanner(System.in);
 
       //menu of HMS
@@ -60,7 +65,7 @@ public class HotelManagementSystemServiceClass {
                     displayGuestOperationMenu(guestService);
                      break;
                  case 4:
-                     System.out.println("4. Reservation Operations");
+                    displayReservationOperationMenu(reservationService);
                      break;
                  case 5:
                      System.out.println("5. Exit");
@@ -176,7 +181,10 @@ public class HotelManagementSystemServiceClass {
                     break;
                 case 2:
 
-                    System.out.println(" Find  Room by id  ");
+                    //step 19 e: find room by id
+                    System.out.println(" Enter the   Room  id to Find:  ");
+                    Long  roomId =  scanner.nextLong();
+                    roomService.findRoomById(roomId);
                     break;
                 case 3:
                     System.out.println("Enter the Room Id to Delete  ");
@@ -224,7 +232,9 @@ public class HotelManagementSystemServiceClass {
                     break;
                 case 2:
 
-                    System.out.println(" Find  Guest by id  ");
+                    System.out.println("Enter  the  Guest  id to Find :   ");
+                     Long guestId =  scanner.nextLong();
+                     guestService.findGuestByID(guestId);
                     break;
                 case 3:
                     System.out.println("Enter the Guest Id to Delete  ");
@@ -233,6 +243,57 @@ public class HotelManagementSystemServiceClass {
                 case 4:
 
                     System.out.println("-----  Find  All  Guest ----  ");
+                    break;
+                case 5:
+                    exit=true;
+                    break;
+                default:
+                    System.out.println("Invalid choice . please try Again");
+                    break;
+            }
+
+
+        }
+
+    }
+
+
+    //step 26[a-b-c-d-e] save Reservation
+
+    private static void displayReservationOperationMenu(ReservationService  reservationService){
+        scanner = new Scanner(System.in);
+
+        boolean exit = false;
+        while (!exit){
+            System.out.println("======Reservation   Operations ======");
+            System.out.println("1. Add new Reservation ");
+            System.out.println("2. Find  Reservation by id  ");
+            System.out.println("3. Delete   Reservation  By id ");
+            System.out.println("4. Find  All  Reservations  ");
+            System.out.println("5. Return to  Main Menu    ");
+            System.out.print("Enter  your  Choice  :");
+
+            int choice = scanner.nextInt();
+            scanner.nextLine();
+            switch (choice){
+                case 1:
+                    //step 18 e: saveHotel
+                    System.out.println("---- Add a new Reservation ----");
+                    reservationService.saveReservation();
+                    break;
+                case 2:
+
+                    System.out.println("Enter  the  Reservation  id to Find :   ");
+                    Long guestId =  scanner.nextLong();
+                    //guestService.findGuestByID(guestId);
+                    break;
+                case 3:
+                    System.out.println("Enter the Reservation Id to Delete  ");
+
+                    break;
+                case 4:
+
+                    System.out.println("-----  Find  All  Reservation ----  ");
                     break;
                 case 5:
                     exit=true;

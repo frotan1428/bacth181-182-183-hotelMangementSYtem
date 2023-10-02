@@ -6,4 +6,9 @@ public interface RoomService {
 
     //step 18b save room
     Room saveRoom();
+
+    //step 19 c: find room By Id
+
+    Room findRoomById(Long id);
+
 }

@@ -3,6 +3,7 @@ package com.tpe.hms.repository;
 import com.tpe.hms.config.HibernateUtils;
 import com.tpe.hms.model.Address;
 import com.tpe.hms.model.Guest;
+import com.tpe.hms.model.Room;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -28,5 +29,15 @@ public class GuestRepositoryImpl implements GuestRepository{
         }catch (Exception e){
             e.printStackTrace();
         }
+    }
+
+
+    //step 22 B: find Guest By id;
+    @Override
+    public Guest findGuestById(Long id) {
+        Session session = HibernateUtils.getSessionFactory().openSession();
+          Guest foundGuest = session.get(Guest.class,id);
+        //  return  session.get(Guest.class,id);
+          return foundGuest;
     }
 }

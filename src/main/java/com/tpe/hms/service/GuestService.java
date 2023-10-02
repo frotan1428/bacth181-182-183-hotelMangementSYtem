@@ -8,4 +8,11 @@ public interface GuestService {
 
     Guest saveGuest();
 
+    //step 23 c : find Guest By Id
+
+    void findGuestByID(Long id);
+
+
+
+
 }

@@ -1,5 +1,6 @@
 package com.tpe.hms.service;
 
+import com.tpe.hms.exception.GuestNotFoundException;
 import com.tpe.hms.model.Address;
 import com.tpe.hms.model.Guest;
 import com.tpe.hms.repository.GuestRepository;
@@ -57,4 +58,26 @@ public class GuestServiceImpl implements GuestService{
         return guest;
 
     }
+
+
+    //step 23 d: findGuestById
+    @Override
+    public void findGuestByID(Long id) {
+        try {
+         Guest foundGuest =   guestRepository.findGuestById(id);
+
+         if (foundGuest != null){
+             System.out.println("==================================");
+             System.out.println(foundGuest);
+         }else {
+             throw  new GuestNotFoundException("Guest Not found WIth Id "+ id);
+         }
+
+        }catch (GuestNotFoundException e){
+            System.out.println(e.getMessage());
+
+        }
+    }
+
+
 }
