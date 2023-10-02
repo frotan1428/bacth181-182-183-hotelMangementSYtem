@@ -13,7 +13,7 @@
         <!-- Database connection settings -->
         <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
 
-        <property name="connection.url">jdbc:postgresql://localhost:5432/HotelManagementSystem_db</property>
+        <property name="connection.url">jdbc:postgresql://localhost:5432/HotelManagementSystem</property>
 
         <property name="connection.username">dev_user</property>
 
@@ -31,13 +31,21 @@
         <property name="show_sql">true</property>
 
         <property name="format_sql">true</property>
+<!--        &lt;!&ndash;        This property enables the second-level cache in Hibernate. When set to "true",&ndash;&gt;-->
+<!--        <property name="hibernate.cache.use_second_level_cache">true</property>-->
+<!--        &lt;!&ndash;        This property enables the query cache in Hibernate. When set to "true",&ndash;&gt;-->
+<!--        <property name="hibernate.cache.use_query_cache">true</property>-->
+<!--        &lt;!&ndash;        This property specifies the implementation class for the cache region factory in Hibernate&ndash;&gt;-->
+<!--        <property name="hibernate.cache.region.factory_class">org.hibernate.cache.jcache.internal.JCacheRegionFactory</property>-->
+<!--        &lt;!&ndash;        This property specifies the cache provider implementation class to be used by Hibernate&ndash;&gt;-->
+<!--        <property name="hibernate.javax.cache.provider">org.ehcache.jsr107.EhcacheCachingProvider</property>-->
 
-<!--&lt;!&ndash;        mapping entity &ndash;&gt;-->
-        <mapping class="com.tpe.hms.model.Hotel"/>
-        <mapping class="com.tpe.hms.model.Room"/>
-        <mapping class="com.tpe.hms.model.Address"/>
-        <mapping class="com.tpe.hms.model.Reservation"/>
-        <mapping class="com.tpe.hms.model.Guest"/>
+        <!-- Mapping entity classes -->
+        <mapping class="com.tpe.HotelManagementSystem.model.Hotel" />
+        <mapping class="com.tpe.HotelManagementSystem.model.Room" />
+        <mapping class="com.tpe.HotelManagementSystem.model.Reservation" />
+        <mapping class="com.tpe.HotelManagementSystem.model.Guest" />
+        <mapping class="com.tpe.HotelManagementSystem.model.Address"/>
 
 
     </session-factory>
